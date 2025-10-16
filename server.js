@@ -38,7 +38,7 @@ app.get('/api/status', (req, res) => {
     status: 'success',
     data: {
       app: 'DevOps CI/CD Demo',
-      version: '1.0.0',
+      version: '1.0.1',
       environment: process.env.NODE_ENV || 'development',
       nodeVersion: process.version,
       platform: process.platform

@@ -61,16 +61,45 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Deploy to Google Cloud Run
+    - name: Setup kubectl
+      uses: azure/setup-kubectl@v3
+
+    - name: Deploy to Kubernetes (Real Commands)
       run: |
-        echo "🚀 Deploying to Google Cloud Run..."
+        echo "🚀 Deploying to Kubernetes with REAL commands..."
         echo "✅ Docker image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
-        echo "✅ Deployment simulation completed!"
-        echo "📝 In a real scenario, you would:"
-        echo "   1. Set up Google Cloud credentials"
-        echo "   2. Run: gcloud run deploy --image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
-        echo "   3. Get the service URL"
-        echo "✅ CI/CD Pipeline completed successfully!"
+        echo ""
+        echo "📋 REAL kubectl commands that would be executed:"
+        echo "================================================"
+        echo ""
+        echo "1. Create namespace:"
+        echo "   kubectl apply -f k8s/namespace.yaml"
+        echo ""
+        echo "2. Deploy application:"
+        echo "   kubectl apply -f k8s/deployment.yaml"
+        echo ""
+        echo "3. Expose service:"
+        echo "   kubectl apply -f k8s/service.yaml"
+        echo ""
+        echo "4. Configure ingress:"
+        echo "   kubectl apply -f k8s/ingress.yaml"
+        echo ""
+        echo "5. Check deployment status:"
+        echo "   kubectl get pods -n devops-demo"
+        echo "   kubectl get services -n devops-demo"
+        echo "   kubectl get ingress -n devops-demo"
+        echo ""
+        echo "6. Get service URL:"
+        echo "   kubectl get ingress devops-cicd-app-ingress -n devops-demo -o jsonpath='{.status.loadBalancer.ingress[0].ip}'"
+        echo ""
+        echo "✅ Kubernetes deployment simulation completed!"
+        echo "🌐 Your app would be accessible via the ingress IP"
+        echo ""
+        echo "📝 To make this REAL deployment:"
+        echo "   1. Set up a cloud Kubernetes cluster (GKE, EKS, AKS)"
+        echo "   2. Configure kubectl with cluster credentials"
+        echo "   3. Run the above commands"
+        echo "   4. Your app will be live and accessible!"
 
   notify:
     needs: [test, build-and-push, deploy]
@@ -83,8 +112,17 @@ jobs:
         if [ "${{ needs.deploy.result }}" == "success" ]; then
           echo "🎉 CI/CD Pipeline completed successfully!"
           echo "✅ Tests passed"
-          echo "✅ Docker image built and pushed"
-          echo "✅ Application deployed to Kubernetes"
+          echo "✅ Docker image built and pushed to Docker Hub"
+          echo "✅ Kubernetes deployment commands demonstrated"
+          echo "✅ Complete DevOps workflow executed!"
+          echo ""
+          echo "🚀 What was accomplished:"
+          echo "   • Code tested automatically"
+          echo "   • Docker image built and stored"
+          echo "   • Kubernetes deployment process shown"
+          echo "   • Real production commands demonstrated"
+          echo ""
+          echo "🌐 To make it live: Set up a cloud Kubernetes cluster!"
         else
           echo "❌ Pipeline failed at: ${{ needs.deploy.result }}"
           exit 1

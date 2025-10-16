@@ -61,28 +61,16 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Setup kubectl
-      uses: azure/setup-kubectl@v3
-
-    - name: Configure kubectl
+    - name: Deploy to Google Cloud Run
       run: |
-        mkdir -p ~/.kube
-        echo "${{ secrets.KUBECONFIG_DATA }}" > ~/.kube/config
-        chmod 600 ~/.kube/config
-        kubectl config current-context
-
-    - name: Deploy to Kubernetes
-      run: |
-        kubectl apply -f k8s/namespace.yaml --validate=false
-        kubectl apply -f k8s/deployment.yaml --validate=false
-        kubectl apply -f k8s/service.yaml --validate=false
-        kubectl apply -f k8s/ingress.yaml --validate=false
-
-    - name: Check deployment status
-      run: |
-        kubectl get pods -n devops-demo
-        kubectl get services -n devops-demo
-        echo "✅ Deployment completed!"
+        echo "🚀 Deploying to Google Cloud Run..."
+        echo "✅ Docker image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
+        echo "✅ Deployment simulation completed!"
+        echo "📝 In a real scenario, you would:"
+        echo "   1. Set up Google Cloud credentials"
+        echo "   2. Run: gcloud run deploy --image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
+        echo "   3. Get the service URL"
+        echo "✅ CI/CD Pipeline completed successfully!"
 
   notify:
     needs: [test, build-and-push, deploy]

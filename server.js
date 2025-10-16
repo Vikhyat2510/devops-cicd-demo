@@ -27,8 +27,8 @@ app.get('/', (req, res) => {
     version: '1.0.1',
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV || 'development',
-    // Test commit to trigger CI/CD pipeline
-    pipeline: 'GitHub Actions + Docker + Kubernetes'
+    // Final test with fixed KUBECONFIG
+    pipeline: 'GitHub Actions + Docker + Kubernetes - Final Test'
   });
 });
 

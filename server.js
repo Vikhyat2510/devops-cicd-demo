@@ -23,10 +23,12 @@ app.get('/health', (req, res) => {
 // Main API endpoint
 app.get('/', (req, res) => {
   res.json({
-    message: 'Welcome to DevOps CI/CD Demo App!',
-    version: '1.0.0',
+    message: 'Welcome to DevOps CI/CD Demo App! 🚀',
+    version: '1.0.1',
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development'
+    environment: process.env.NODE_ENV || 'development',
+    // Test commit to trigger CI/CD pipeline
+    pipeline: 'GitHub Actions + Docker + Kubernetes'
   });
 });
 

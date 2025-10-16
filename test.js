@@ -8,8 +8,8 @@ describe('DevOps CI/CD App', () => {
       .get('/')
       .expect(200);
     
-    expect(response.body.message).toBe('Welcome to DevOps CI/CD Demo App!');
-    expect(response.body.version).toBe('1.0.0');
+    expect(response.body.message).toBe('Welcome to DevOps CI/CD Demo App! 🚀');
+    expect(response.body.version).toBe('1.0.1');
   });
 
   test('GET /health should return health status', async () => {
@@ -29,7 +29,7 @@ describe('DevOps CI/CD App', () => {
     
     expect(response.body.status).toBe('success');
     expect(response.body.data.app).toBe('DevOps CI/CD Demo');
-    expect(response.body.data.version).toBe('1.0.0');
+    expect(response.body.data.version).toBe('1.0.1');
   });
 
   test('GET /nonexistent should return 404', async () => {

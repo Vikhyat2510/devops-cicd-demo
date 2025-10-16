@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: devops-cicd-app
-        image: YOUR_DOCKERHUB_USERNAME/devops-cicd-app:latest
+        image: vikhyat25/devops-cicd-app:latest
         ports:
         - containerPort: 3000
         env:
